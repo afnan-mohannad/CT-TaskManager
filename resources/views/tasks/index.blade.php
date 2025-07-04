@@ -8,21 +8,23 @@
     <div class="col-md-8 mb-3">
         <form id="projectsForm" method="GET">
             <select name="project_id" class="form-select" onchange="this.form.submit()">
-                <option value="">All Projects</option>
                     @forelse($projects as $project)
                         <option value="{{ $project->id }}" {{ ($selected == $project->id) ? 'selected' : '' }}>{{ $project->title }}</option>
                     @empty
-                        <option value="">No Projects Available</option>
+                        <option value="">No Projects</option>
                     @endforelse
             </select>
         </form>
     </div>
-   <div class="col-md-4 mb-3">
-        <button class="btn btn-info" onclick="openAddTaskModal()">Add New Task</button>
-        <span class="text-muted ms-2">#1 priority goes at top, #2 next down.</span>
-    </div>
+    @if(isset($projects) && $projects->count() > 0)
+        <div class="col-md-4 mb-3">
+            <button class="btn btn-info" onclick="openAddTaskModal()">Add New Task</button>
+            <span class="text-muted ms-2">#1 priority goes at top, #2 next down.</span>
+        </div>
+    @endif
 </div>
 <hr>
+@if(isset($projects) && $projects->count() > 0)
 <div class="row pt-3">
     <h2>Tasks for project: {{ $projects->firstWhere('id', $selected)->title ?? 'All Projects' }}</h2>
     <ul class="list-group" id="taskListing">
@@ -37,7 +39,7 @@
         @endforeach
     </ul>
 </div>
-
+@endif
 @include('layouts.partials.modal')
 
 @endsection

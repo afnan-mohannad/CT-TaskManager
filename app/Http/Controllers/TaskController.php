@@ -14,14 +14,27 @@ class TaskController extends Controller
     public function index(Request $request)
     {
         $projects = Project::getAll();
-        $selected = $request->get('project_id', $projects->first()?->id);
-        $tasks = Task::getByProjectId($selected);
+        if ($projects->isEmpty()) {
+            return view('tasks.index')->with([
+                'projects' => collect([]),
+                'selected' => null,
+                'tasks' => collect([]),
+            ]);
+        } else {
+            $selected = $request->get('project_id', $projects->first()?->id);
 
-        return view('tasks.index')->with([
-            'projects' => $projects,
-            'selected' => $selected,
-            'tasks' => $tasks,
-        ]);
+            if (!$selected) {
+                $selected = null; 
+            } else {
+                $tasks = Task::getByProjectId($selected);
+            }
+
+            return view('tasks.index')->with([
+                'projects' => $projects,
+                'selected' => $selected,
+                'tasks' => $tasks ?? collect([]),
+            ]);
+        }
     }
 
     /**
