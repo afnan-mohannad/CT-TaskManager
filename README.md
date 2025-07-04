@@ -26,4 +26,4 @@ very simple Laravel web application for task management
    ```
    php artisan serve
    ```
-# by Afnan Mohannad Amarni
+
