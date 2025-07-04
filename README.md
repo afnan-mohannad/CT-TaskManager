@@ -7,7 +7,7 @@ very simple Laravel web application for task management
  - Reorder tasks with drag and drop in the browser
 ## How to install and use
 1. **Clone the repo**
-    git clone "repo name"
+    git clone git@github.com:afnan-mohannad/CT-TaskManager.git
     cd task-manager
 2. **Install dependencies**
     ```
