@@ -1,0 +1,11 @@
+.task-item {
+    cursor: move;
+    background: #eff2f4;
+}
+.task-item:hover {
+    background-color: #c3c8cc;
+}
+
+h1 {
+    text-align: center;
+}
